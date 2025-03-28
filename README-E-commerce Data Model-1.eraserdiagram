@@ -1,0 +1,61 @@
+entity-relationship-diagram
+
+// title
+title E-commerce Data Model
+
+// define tables
+customers [icon: user, color: lightblue] {
+  id string pk
+  name string
+  email string
+  phone string
+  address string
+}
+
+products [icon: box, color: green] {
+  id string pk
+  name string
+  description string
+  price decimal
+  stock_quantity int
+  category_id string
+}
+
+categories [icon: tag, color: orange] {
+  id string pk
+  name string
+  description string
+}
+
+orders [icon: shopping-cart, color: purple] {
+  id string pk
+  order_date timestamp
+  customer_id string
+  total_amount decimal
+  status string
+}
+
+order_items [icon: list, color: red] {
+  id string pk
+  order_id string
+  product_id string
+  quantity int
+  price decimal
+}
+
+payments [icon: credit-card, color: yellow] {
+  id string pk
+  order_id string
+  payment_date timestamp
+  amount decimal
+  payment_method string
+  status string
+}
+
+// define relationships
+customers.id > orders.customer_id
+orders.id > order_items.order_id
+products.id > order_items.product_id
+categories.id > products.category_id
+orders.id > payments.order_id
+
